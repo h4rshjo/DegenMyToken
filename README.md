@@ -86,6 +86,7 @@ contract DegenToken is ERC20, Ownable {
         return balanceOf(account);
     }
 }
+```
 3. In Remix, navigate to the "Solidity Compiler" tab on the left sidebar.
 4. Ensure the compiler version is set to 0.8.18.
 5. Click the "Compile DegenToken.sol" button.
