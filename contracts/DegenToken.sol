@@ -14,6 +14,9 @@ contract DegenToken is ERC20, Ownable {
     event TokensBurned(address indexed from, uint256 amount);
     event TokensRedeemed(address indexed from, uint256 amount, uint256 gameItem);
 
+    // Mapping to track redeemed items for each player
+    mapping(address => mapping(uint256 => uint256)) public redeemedItems;
+
     // Constructor to initialize the token with name "Degen" and symbol "DGN"
     constructor() ERC20("Degen", "DGN") {}
 
@@ -42,14 +45,17 @@ contract DegenToken is ERC20, Ownable {
             // Check if enough tokens for Game Item 1
             require(amount >= 50, "Insufficient tokens for Game Item 1");
             _burn(to, amount);
+            redeemedItems[to][1] = redeemedItems[to][1].add(1); // Increment the count of Game Item 1
         } else if (gameItem == 2) {
             // Check if enough tokens for Game Item 2
             require(amount >= 100, "Insufficient tokens for Game Item 2");
             _burn(to, amount);
+            redeemedItems[to][2] = redeemedItems[to][2].add(1); // Increment the count of Game Item 2
         } else if (gameItem == 3) {
             // Check if enough tokens for Game Item 3
             require(amount >= 200, "Insufficient tokens for Game Item 3");
             _burn(to, amount);
+            redeemedItems[to][3] = redeemedItems[to][3].add(1); // Increment the count of Game Item 3
         } else {
             // Invalid game item
             revert("Invalid game item");
